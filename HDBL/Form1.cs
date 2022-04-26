@@ -159,31 +159,40 @@ namespace HDBL
         private void btn_ghidulieu_Click(object sender, EventArgs e)
         {
             Dictionary<string, object> valuePairs = new Dictionary<string, object>();
-            valuePairs.Add("SODONHANG", "'"+txt_sodonhang.Text+"'");
-            valuePairs.Add("MAKH", "'"+dt.Rows[0]["MaKH"]+"'");
-            valuePairs.Add("NGAYLAP", "'" + dtp_ngay.Text + "'");
+            valuePairs.Add("SODONHANG", "'" + txt_sodonhang.Text + "'");
+            valuePairs.Add("MAKH", "'" + dt.Rows[0]["MaKH"] + "'");
+            valuePairs.Add("NGAYLAP", "'" + magicDate(dtp_ngay.Text) + "'");
             valuePairs.Add("NOIGIAOHANG", "'" + txt_noigiaohang.Text + "'");
-            valuePairs.Add("THOIGIANGIAO", "'" + dtp_ngay.Text + "'");
+            valuePairs.Add("THOIGIANGIAO", "'" + magicDate(dtp_ngay.Text) + "'");
             valuePairs.Add("THUE", txt_thue.Text);
             valuePairs.Add("CHIETKHAU", txt_ck.Text);
+            valuePairs.Add("MANVLAPDH", "'" + cb_nvkd.SelectedValue.ToString() + "'");
             valuePairs.Add("SOTIEN", txt_tongcong.Text);
             string result = onewaycls.insertData("DONHANG", valuePairs);
-            for(int i = 0; i < dataGV_cthd.RowCount - 1; i++)
+            for (int i = 0; i < dataGV_cthd.RowCount - 1; i++)
             {
                 Dictionary<string, object> valPairs = new Dictionary<string, object>();
                 valPairs.Add("SODONHANG", valuePairs["SODONHANG"]);
                 valPairs.Add("MAHANG", "'" + dataGV_cthd.Rows[i].Cells["MaHang_2"].Value + "'");
                 valPairs.Add("SOLUONG", dataGV_cthd.Rows[i].Cells["SL"].Value);
-                //MessageBox.Show(onewaycls.insertData("CHITIETDONHANG", valPairs));   
+                onewaycls.insertData("CHITIETDONHANG", valPairs);
             }
+            cls_luu.sohd = txt_sodonhang.Text;
             MessageBox.Show(result);
             btn_inhoadon.Enabled = true;
             activeDataSQL();
         }
 
+        public string magicDate(string date)
+        {
+            string[] dateReal = date.Split('/');
+            Array.Reverse(dateReal);
+            return String.Join("-", dateReal);
+        }
         private void btn_inhoadon_Click(object sender, EventArgs e)
         {
-            
+            Form2 F2 = new Form2();
+            F2.Show();
         }
     }
 }

@@ -33,12 +33,15 @@ namespace CLSB
             }
             string queryK = queryKey.Substring(0, queryKey.Length - 1);
             string queryV = queryVal.Substring(0, queryVal.Length - 1);
-            SqlCommand cmd = new SqlCommand(String.Format("INSERT INTO {0}({1}) VALUES({2})", tableName, queryK, queryV), 
+            //return String.Format("INSERT INTO {0}({1}) VALUES({2})", tableName, queryK, queryV);
+            SqlCommand cmd = new SqlCommand(String.Format("INSERT INTO {0}({1}) VALUES({2})", tableName, queryK, queryV),
                 ketnoicls.conn);
             cmd.Connection.Open();
-            if(cmd.ExecuteNonQuery() > 0){
+            if (cmd.ExecuteNonQuery() > 0)
+            {
                 res = "Đã Thêm Thành Công";
-            }else res = "Có Lỗi Thành Công";
+            }
+            else res = "Có Lỗi Thành Công";
             cmd.Connection.Close();
             return res;
         }
