@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HDBL", "HDBL\HDBL.csproj", "{FF1D74FE-FE47-4168-A10E-239D085D0538}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLSB", "CLSB\CLSB.csproj", "{6423B198-1543-4D60-8B0C-7789C857C748}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF1D74FE-FE47-4168-A10E-239D085D0538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF1D74FE-FE47-4168-A10E-239D085D0538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF1D74FE-FE47-4168-A10E-239D085D0538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF1D74FE-FE47-4168-A10E-239D085D0538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6423B198-1543-4D60-8B0C-7789C857C748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6423B198-1543-4D60-8B0C-7789C857C748}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6423B198-1543-4D60-8B0C-7789C857C748}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6423B198-1543-4D60-8B0C-7789C857C748}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

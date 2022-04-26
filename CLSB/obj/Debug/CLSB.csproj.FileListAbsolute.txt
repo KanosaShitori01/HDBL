@@ -1,0 +1,5 @@
+D:\QLBH-CNTT\HDBL\CLSB\bin\Debug\CLSB.dll
+D:\QLBH-CNTT\HDBL\CLSB\bin\Debug\CLSB.pdb
+D:\QLBH-CNTT\HDBL\CLSB\obj\Debug\CLSB.csprojResolveAssemblyReference.cache
+D:\QLBH-CNTT\HDBL\CLSB\obj\Debug\CLSB.dll
+D:\QLBH-CNTT\HDBL\CLSB\obj\Debug\CLSB.pdb

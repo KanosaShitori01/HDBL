@@ -1,0 +1,10 @@
+D:\QLBH-CNTT\HDBL\HDBL\bin\Debug\HDBL.exe
+D:\QLBH-CNTT\HDBL\HDBL\bin\Debug\HDBL.pdb
+D:\QLBH-CNTT\HDBL\HDBL\obj\Debug\HDBL.csprojResolveAssemblyReference.cache
+D:\QLBH-CNTT\HDBL\HDBL\obj\Debug\HDBL.Form1.resources
+D:\QLBH-CNTT\HDBL\HDBL\obj\Debug\HDBL.Properties.Resources.resources
+D:\QLBH-CNTT\HDBL\HDBL\obj\Debug\HDBL.csproj.GenerateResource.Cache
+D:\QLBH-CNTT\HDBL\HDBL\obj\Debug\HDBL.exe
+D:\QLBH-CNTT\HDBL\HDBL\obj\Debug\HDBL.pdb
+D:\QLBH-CNTT\HDBL\HDBL\bin\Debug\CLSB.dll
+D:\QLBH-CNTT\HDBL\HDBL\bin\Debug\CLSB.pdb
