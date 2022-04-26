@@ -136,6 +136,7 @@
             // 
             // btn_ghidulieu
             // 
+            this.btn_ghidulieu.Enabled = false;
             this.btn_ghidulieu.Location = new System.Drawing.Point(817, 632);
             this.btn_ghidulieu.Name = "btn_ghidulieu";
             this.btn_ghidulieu.Size = new System.Drawing.Size(105, 23);
@@ -146,12 +147,14 @@
             // 
             // btn_inhoadon
             // 
+            this.btn_inhoadon.Enabled = false;
             this.btn_inhoadon.Location = new System.Drawing.Point(708, 632);
             this.btn_inhoadon.Name = "btn_inhoadon";
             this.btn_inhoadon.Size = new System.Drawing.Size(103, 23);
             this.btn_inhoadon.TabIndex = 17;
             this.btn_inhoadon.Text = "In Hóa Đơn";
             this.btn_inhoadon.UseVisualStyleBackColor = true;
+            this.btn_inhoadon.Click += new System.EventHandler(this.btn_inhoadon_Click);
             // 
             // button5
             // 

@@ -23,24 +23,25 @@ namespace HDBL
         {
             string newID = "";
             DataTable table = onewaycls.queryAdapFree(
-                String.Format("SELECT * FROM DONHANG WHERE SODONHANG LIKE '%{0}%'", mah));
+                String.Format("SELECT * FROM DONHANG WHERE SODONHANG LIKE '%{0}%'", mah.Substring(0, mah.Length - 3)));
             if (table.Rows.Count > 0)
             {
-                int length = table.Rows[0]["SODONHANG"].ToString().Length;
-                newID = table.Rows[0]["SODONHANG"].ToString().Substring(length - 3);
+                int length = table.Rows.Count;
+                newID += length;
             }
             else return 1;
             return Convert.ToInt32(newID) + 1;
         }
+        public void clearAll()
+        {
+            txt_khachhang.DataBindings.Clear();
+            txt_noigiaohang.DataBindings.Clear();
+            txt_thoigiangiao.DataBindings.Clear();
+            txt_ghichu.DataBindings.Clear();
+        }
         public void activeDataSQL()
         {
-            foreach (Control ctr in Controls)
-            {
-                if (ctr is TextBox || ctr is ComboBox)
-                {
-                    ctr.DataBindings.Clear();
-                }
-            }
+            clearAll();
             string mahangsieudang = cls_xauchuoi.mahang_sieudang("HDL", dtp_ngay.Text);
             mahangsieudang = cls_xauchuoi.mahang_sieudang("HDL", dtp_ngay.Text, reachMH(mahangsieudang));
             txt_sodonhang.Text = mahangsieudang;
@@ -147,6 +148,7 @@ namespace HDBL
         {
             //SumAll();
             txt_tongcong.Text = SumAll().ToString();
+            btn_ghidulieu.Enabled = true;
         }
 
         private void nup_valck_ValueChanged(object sender, EventArgs e)
@@ -160,7 +162,7 @@ namespace HDBL
             valuePairs.Add("SODONHANG", "'"+txt_sodonhang.Text+"'");
             valuePairs.Add("MAKH", "'"+dt.Rows[0]["MaKH"]+"'");
             valuePairs.Add("NGAYLAP", "'" + dtp_ngay.Text + "'");
-            valuePairs.Add("NOIGIAOHANG", "'Thanh Hóa'");
+            valuePairs.Add("NOIGIAOHANG", "'" + txt_noigiaohang.Text + "'");
             valuePairs.Add("THOIGIANGIAO", "'" + dtp_ngay.Text + "'");
             valuePairs.Add("THUE", txt_thue.Text);
             valuePairs.Add("CHIETKHAU", txt_ck.Text);
@@ -175,6 +177,13 @@ namespace HDBL
                 //MessageBox.Show(onewaycls.insertData("CHITIETDONHANG", valPairs));   
             }
             MessageBox.Show(result);
+            btn_inhoadon.Enabled = true;
+            activeDataSQL();
+        }
+
+        private void btn_inhoadon_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
