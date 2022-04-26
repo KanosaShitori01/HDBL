@@ -31,8 +31,8 @@ namespace CLSB
                 queryKey += i.Key + ",";
                 queryVal += i.Value + ",";
             }
-            string queryK = queryKey.Substring(0, queryKey.Length - 2);
-            string queryV = queryVal.Substring(0, queryVal.Length - 2);
+            string queryK = queryKey.Substring(0, queryKey.Length - 1);
+            string queryV = queryVal.Substring(0, queryVal.Length - 1);
             SqlCommand cmd = new SqlCommand(String.Format("INSERT INTO {0}({1}) VALUES({2})", tableName, queryK, queryV), 
                 ketnoicls.conn);
             cmd.Connection.Open();

@@ -11,16 +11,29 @@ namespace HDBL
 {
     public partial class Form1 : Form
     {
+        public DataTable dtgv = onewaycls.selectData("HANGHOA");
+        public DataTable dtnv = onewaycls.selectData("NHANVIEN");
+        public DataTable dt = onewaycls.queryAdapFree("SELECT TOP 1 SODONHANG, SOTIEN, CHIETKHAU, KHACHHANG.MAKH, (KHACHHANG.MAKH + ' - ' + TENKH) AS FULLTENKH, NOIGIAOHANG, THOIGIANGIAO, GHICHU FROM DONHANG "
+        + "INNER JOIN KHACHHANG ON KHACHHANG.MAKH = DONHANG.MAKH WHERE KHACHHANG.MAKH = 'KH0080'");
         public Form1()
         {
             InitializeComponent();
         }
+        public int reachMH(string mah)
+        {
+            string newID = "";
+            DataTable table = onewaycls.queryAdapFree(
+                String.Format("SELECT * FROM DONHANG WHERE SODONHANG LIKE '%{0}%'", mah));
+            if (table.Rows.Count > 0)
+            {
+                int length = table.Rows[0]["SODONHANG"].ToString().Length;
+                newID = table.Rows[0]["SODONHANG"].ToString().Substring(length - 3);
+            }
+            else return 1;
+            return Convert.ToInt32(newID) + 1;
+        }
         public void activeDataSQL()
         {
-            DataTable dtgv = onewaycls.selectData("HANGHOA");
-            DataTable dtnv = onewaycls.selectData("NHANVIEN");
-            DataTable dt = onewaycls.queryAdapFree("SELECT TOP 1 SODONHANG, (KHACHHANG.MAKH + ' - ' + TENKH) AS FULLTENKH, NOIGIAOHANG, THOIGIANGIAO, GHICHU FROM DONHANG "
-            +"INNER JOIN KHACHHANG ON KHACHHANG.MAKH = DONHANG.MAKH WHERE KHACHHANG.MAKH = 'KH0080'");
             foreach (Control ctr in Controls)
             {
                 if (ctr is TextBox || ctr is ComboBox)
@@ -28,7 +41,9 @@ namespace HDBL
                     ctr.DataBindings.Clear();
                 }
             }
-            txt_sodonhang.DataBindings.Add("Text", dt, "SODONHANG");
+            string mahangsieudang = cls_xauchuoi.mahang_sieudang("HDL", dtp_ngay.Text);
+            mahangsieudang = cls_xauchuoi.mahang_sieudang("HDL", dtp_ngay.Text, reachMH(mahangsieudang));
+            txt_sodonhang.Text = mahangsieudang;
             txt_khachhang.DataBindings.Add("Text", dt, "FULLTENKH");
             txt_noigiaohang.DataBindings.Add("Text", dt, "NOIGIAOHANG");
             txt_thoigiangiao.DataBindings.Add("Text", dt, "THOIGIANGIAO");
@@ -44,21 +59,24 @@ namespace HDBL
             string th = dataGV.CurrentRow.Cells["TenHang"].Value.ToString();
             int sl = Convert.ToInt32(nup_soluong.Value);
             double dongia = Convert.ToDouble(dataGV.CurrentRow.Cells[(sl >= 100) ? "GiaBanBuon" : "GiaBanLe"].Value);
+            double thanhtien = sl * dongia;
             //MessageBox.Show(checkDupli(mh).ToString());
             if (checkDupli(mh) != -1)
             {
-                dataGV_cthd.Rows[checkDupli(mh)].Cells["SL"].Value =
-                    Convert.ToInt32(dataGV_cthd.Rows[checkDupli(mh)].Cells["SL"].Value) + sl;
-                if (Convert.ToInt32(dataGV_cthd.Rows[checkDupli(mh)].Cells["SL"].Value) >= 100)
+                DataGridViewRow gridView = dataGV_cthd.Rows[checkDupli(mh)];
+                DataGridViewRow gridView2 = dataGV.Rows[checkDupli(mh)];
+                gridView.Cells["SL"].Value = Convert.ToInt32(gridView.Cells["SL"].Value) + sl;
+                gridView.Cells["ThanhTien"].Value = Convert.ToInt32(gridView.Cells["SL"].Value) * dongia;
+                if (Convert.ToInt32(gridView.Cells["SL"].Value) >= 100)
                 {
-                    dataGV_cthd.Rows[checkDupli(mh)].Cells["DonGia"].Value = dataGV.CurrentRow.Cells["GiaBanBuon"].Value;
+                    gridView.Cells["DonGia"].Value = gridView2.Cells["GiaBanBuon"].Value;
                 }
             }
             else
             {
-                dataGV_cthd.Rows.Add(mh, th, sl, dongia, nup_ck.Value, nup_tongcong.Value);
+                dataGV_cthd.Rows.Add(mh, th, sl, dongia, dt.Rows[0]["CHIETKHAU"], thanhtien);
             }
-          
+            SumAll();
         }
         public int checkDupli(string id)
         {
@@ -75,9 +93,8 @@ namespace HDBL
         private void Form1_Load(object sender, EventArgs e)
         {
             activeDataSQL();
-
         }
-        public void group_box_tongcong()
+        public decimal SumAll()
         {
             decimal tienhang = 0;
             decimal thue = Convert.ToInt16(nup_valthue.Value);
@@ -87,16 +104,13 @@ namespace HDBL
             {
                 tienhang = tienhang + Convert.ToDecimal(dataGV_cthd.Rows[i].Cells["ThanhTien"].Value);
             }
-            MessageBox.Show(tienhang.ToString());
             thue = (nup_valthue.Value / 100) * tienhang;
             chiet_khau = (this.nup_valck.Value / 100) * tienhang;
             Tong_cong = tienhang + thue - chiet_khau;
-            //nup_tienhang.Text = tienhang.ToString();
-            //nup_tongcong.Text = Tong_cong.ToString();
-            //nup_thue.Text = thue.ToString();
-            //nup_ck.Text = chiet_khau.ToString();
-            nup_thue.Value = thue;
-            MessageBox.Show(thue.ToString());
+            txt_tienhang.Text = tienhang.ToString();
+            txt_thue.Text = thue.ToString();
+            txt_ck.Text = chiet_khau.ToString();
+            return Tong_cong;
         }
 
         private void nup_tienhang_ValueChanged(object sender, EventArgs e)
@@ -126,12 +140,41 @@ namespace HDBL
 
         private void nup_valthue_ValueChanged(object sender, EventArgs e)
         {
-
+            txt_thue.Text = ((nup_valthue.Value / 100) * Convert.ToInt32(txt_tienhang.Text)).ToString();
         }
 
         private void btn_thanhtoan_Click(object sender, EventArgs e)
         {
-            group_box_tongcong();
+            //SumAll();
+            txt_tongcong.Text = SumAll().ToString();
+        }
+
+        private void nup_valck_ValueChanged(object sender, EventArgs e)
+        {
+            txt_ck.Text = ((nup_valck.Value / 100) * Convert.ToInt32(txt_tienhang.Text)).ToString();
+        }
+
+        private void btn_ghidulieu_Click(object sender, EventArgs e)
+        {
+            Dictionary<string, object> valuePairs = new Dictionary<string, object>();
+            valuePairs.Add("SODONHANG", "'"+txt_sodonhang.Text+"'");
+            valuePairs.Add("MAKH", "'"+dt.Rows[0]["MaKH"]+"'");
+            valuePairs.Add("NGAYLAP", "'" + dtp_ngay.Text + "'");
+            valuePairs.Add("NOIGIAOHANG", "'Thanh Hóa'");
+            valuePairs.Add("THOIGIANGIAO", "'" + dtp_ngay.Text + "'");
+            valuePairs.Add("THUE", txt_thue.Text);
+            valuePairs.Add("CHIETKHAU", txt_ck.Text);
+            valuePairs.Add("SOTIEN", txt_tongcong.Text);
+            string result = onewaycls.insertData("DONHANG", valuePairs);
+            for(int i = 0; i < dataGV_cthd.RowCount - 1; i++)
+            {
+                Dictionary<string, object> valPairs = new Dictionary<string, object>();
+                valPairs.Add("SODONHANG", valuePairs["SODONHANG"]);
+                valPairs.Add("MAHANG", "'" + dataGV_cthd.Rows[i].Cells["MaHang_2"].Value + "'");
+                valPairs.Add("SOLUONG", dataGV_cthd.Rows[i].Cells["SL"].Value);
+                //MessageBox.Show(onewaycls.insertData("CHITIETDONHANG", valPairs));   
+            }
+            MessageBox.Show(result);
         }
     }
 }

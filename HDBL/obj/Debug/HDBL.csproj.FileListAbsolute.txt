@@ -8,3 +8,15 @@ D:\QLBH-CNTT\HDBL\HDBL\obj\Debug\HDBL.exe
 D:\QLBH-CNTT\HDBL\HDBL\obj\Debug\HDBL.pdb
 D:\QLBH-CNTT\HDBL\HDBL\bin\Debug\CLSB.dll
 D:\QLBH-CNTT\HDBL\HDBL\bin\Debug\CLSB.pdb
+C:\Users\Admin\Source\Repos\HDBL\HDBL\obj\Debug\HDBL.csproj.AssemblyReference.cache
+C:\Users\Admin\Source\Repos\HDBL\HDBL\obj\Debug\HDBL.Form1.resources
+C:\Users\Admin\Source\Repos\HDBL\HDBL\obj\Debug\HDBL.Properties.Resources.resources
+C:\Users\Admin\Source\Repos\HDBL\HDBL\obj\Debug\HDBL.csproj.GenerateResource.cache
+C:\Users\Admin\Source\Repos\HDBL\HDBL\obj\Debug\HDBL.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Source\Repos\HDBL\HDBL\obj\Debug\HDBL.exe
+C:\Users\Admin\Source\Repos\HDBL\HDBL\obj\Debug\HDBL.pdb
+C:\Users\Admin\Source\Repos\HDBL\HDBL\bin\Debug\HDBL.exe
+C:\Users\Admin\Source\Repos\HDBL\HDBL\bin\Debug\HDBL.pdb
+C:\Users\Admin\Source\Repos\HDBL\HDBL\bin\Debug\CLSB.dll
+C:\Users\Admin\Source\Repos\HDBL\HDBL\bin\Debug\CLSB.pdb
+C:\Users\Admin\Source\Repos\HDBL\HDBL\obj\Debug\HDBL.csproj.CopyComplete

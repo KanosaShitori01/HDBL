@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cls_xauchuoi.cs" />
     <Compile Include="ketnoicls.cs" />
     <Compile Include="onewaycls.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
